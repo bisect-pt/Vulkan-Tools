@@ -37,9 +37,9 @@ set(CMAKE_C_EXTENSIONS OFF)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 option(BUILD_CUBE "Build cube" ON)
-option(BUILD_VULKANINFO "Build vulkaninfo" ON)
-option(BUILD_ICD "Build icd" ON)
-option(ENABLE_ADDRESS_SANITIZER "Use address sanitization")
+option(BUILD_VULKANINFO "Build vulkaninfo" OFF)
+option(BUILD_ICD "Build icd" OFF)
+option(ENABLE_ADDRESS_SANITIZER "Use address sanitization" OFF)
 
 if(WIN32)
     # Optional: Allow specify the exact version used in the vulkaninfo executable
@@ -65,7 +65,7 @@ if(APPLE)
 endif()
 
 find_package(VulkanHeaders QUIET CONFIG)
-find_package(VulkanLoader QUIET CONFIG)
+find_package(Vulkan QUIET CONFIG)
 
 include(GNUInstallDirs)
 
@@ -165,7 +165,7 @@ endif()
 
 add_subdirectory(windows-runtime-installer)
 
-option(BUILD_TESTS "Build the tests")
+option(BUILD_TESTS "Build the tests" OFF)
 if(BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)

@@ -56,7 +56,7 @@ get_target_property(TEST_SOURCES vulkan_tools_tests SOURCES)
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${TEST_SOURCES})
 
 target_include_directories(vulkan_tools_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
-target_link_libraries(vulkan_tools_tests GTest::gtest Vulkan::Headers Vulkan::Loader)
+target_link_libraries(vulkan_tools_tests GTest::gtest Vulkan::Headers Vulkan::Vulkan)
 add_dependencies(vulkan_tools_tests generate_binary_locations)
 if (WIN32)
     target_compile_definitions(vulkan_tools_tests PUBLIC -DVK_USE_PLATFORM_WIN32_KHR -DWIN32_LEAN_AND_MEAN -DNOMINMAX)
@@ -75,7 +75,7 @@ endif ()
 if (WIN32)
     # Copy the loader shared lib (if built) to the test application directory so the test app finds it.
     add_custom_command(TARGET vulkan_tools_tests POST_BUILD
-                           COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Vulkan::Loader> $<TARGET_FILE_DIR:vulkan_tools_tests>)
+                           COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:Vulkan::Vulkan> $<TARGET_FILE_DIR:vulkan_tools_tests>)
 endif()
 
 include(GoogleTest)

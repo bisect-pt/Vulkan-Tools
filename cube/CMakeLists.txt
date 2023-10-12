@@ -195,7 +195,7 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Linux|BSD")
     if (NEED_RT)
         target_link_libraries(vkcube PRIVATE rt)
     endif()
-    target_link_libraries(vkcube PRIVATE Vulkan::Headers Vulkan::Loader)
+    target_link_libraries(vkcube PRIVATE Vulkan::Headers Vulkan::Vulkan)
 elseif(WIN32)
     add_executable(vkcube WIN32)
     target_sources(vkcube PRIVATE
@@ -205,7 +205,7 @@ elseif(WIN32)
         cube.vert.inc
         cube.frag.inc
     )
-    target_link_libraries(vkcube PRIVATE Vulkan::Headers Vulkan::Loader)
+    target_link_libraries(vkcube PRIVATE Vulkan::Headers Vulkan::Vulkan)
 else()
     message(FATAL_ERROR "Unsupported Platform!")
 endif()
@@ -249,7 +249,7 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Linux|BSD")
                    cube.vert.inc
                    cube.frag.inc
                    ${OPTIONAL_WAYLAND_DATA_FILES})
-    target_link_libraries(vkcubepp Vulkan::Headers Vulkan::Loader)
+    target_link_libraries(vkcubepp Vulkan::Headers Vulkan::Vulkan)
     target_compile_definitions(vkcubepp PUBLIC ${CUBE_PLATFORM})
 
     if (ENABLE_ADDRESS_SANITIZER)
@@ -264,7 +264,7 @@ else()
                    ${PROJECT_SOURCE_DIR}/cube/cube.frag
                    cube.vert.inc
                    cube.frag.inc)
-    target_link_libraries(vkcubepp Vulkan::Headers Vulkan::Loader)
+    target_link_libraries(vkcubepp Vulkan::Headers Vulkan::Vulkan)
 endif()
 target_include_directories(vkcubepp PRIVATE .)
 
@@ -305,7 +305,7 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux|BSD")
         )
         target_link_libraries(vkcube-wayland PRIVATE
             Vulkan::Headers
-            Vulkan::Loader
+            Vulkan::Vulkan
             PkgConfig::WAYLAND_CLIENT
         )
         target_compile_definitions(vkcube-wayland PRIVATE VK_USE_PLATFORM_WAYLAND_KHR)

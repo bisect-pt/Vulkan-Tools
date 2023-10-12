@@ -103,7 +103,7 @@ endif()
 
 if(APPLE)
     # We do this so vulkaninfo is linked to an individual library and NOT a framework.
-    target_link_libraries(vulkaninfo Vulkan::Loader "-framework AppKit -framework QuartzCore")
+    target_link_libraries(vulkaninfo Vulkan::Vulkan "-framework AppKit -framework QuartzCore")
     target_include_directories(vulkaninfo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/macOS/vulkaninfo)
 endif()
 
